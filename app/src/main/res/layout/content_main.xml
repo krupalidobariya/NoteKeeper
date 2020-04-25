@@ -15,27 +15,27 @@
             android:gravity="start|top"
             android:ems="10"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="88dp" app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/textNotetitle" android:hint="Note title"
+            android:layout_marginTop="116dp" app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/textNoteTitle" android:hint="Note title"
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/textNotetext"/>
+            android:autofillHints="@string/title_activity_note_list" app:layout_constraintHorizontal_bias="0.358"/>
     <Spinner
-            android:layout_width="350dp"
-            android:layout_height="44dp"
+            android:layout_width="342dp"
+            android:layout_height="46dp"
             android:id="@+id/spinnerCourses"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginEnd="32dp" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="16dp" android:layout_marginTop="16dp"/>
     <EditText
-            android:layout_width="343dp"
-            android:layout_height="54dp"
+            android:layout_width="336dp"
+            android:layout_height="69dp"
             android:inputType="textMultiLine"
             android:gravity="start|top"
             android:ems="10"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="164dp" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:id="@+id/textNotetitle" android:hint="Note text"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"/>
+            android:id="@+id/textNoteText" app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="200dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginBottom="296dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.353"
+            app:layout_constraintVertical_bias="0.0" android:hint=" Note Text"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.example.notekeeper
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,5 +25,10 @@ class NoteListActivity : AppCompatActivity() {
         listNotes.adapter = ArrayAdapter(this,
             android.R.layout.simple_list_item_1,
             Datamanger.notes)
+        listNotes.setOnItemClickListener { parent, view, position, id ->
+            val activityIntent=Intent(this,MainActivity::class.java)
+            activityIntent.putExtra(EXTRA_NOTES_POSITION,position)
+            startActivity(activityIntent)
+        }
     }
 }
