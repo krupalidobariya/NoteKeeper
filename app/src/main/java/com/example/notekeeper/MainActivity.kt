@@ -21,11 +21,22 @@ class MainActivity : AppCompatActivity() {
             Datamanger.courses.values.toList())
         adapterCourse.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
        spinnerCourses.adapter =adapterCourse
-        noteposition=intent.getIntExtra(EXTRA_NOTES_POSITION, POSITION_NOTE_SET)
+        noteposition=savedInstanceState?.getInt(NOTES_POSITION, POSITION_NOTE_SET)?:
+            intent.getIntExtra(NOTES_POSITION, POSITION_NOTE_SET)
         if(noteposition!=POSITION_NOTE_SET) {
             displayNote()
         }
+        else
+        {
+            Datamanger.notes.add(NoteInfo(course))
+            noteposition=Datamanger.notes.lastIndex
+        }
 
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(NOTES_POSITION,noteposition)
     }
 
     private fun displayNote() {
@@ -49,7 +60,44 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> true
+            R.id.action_next->{
+                moveNext()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun moveNext() {
+        ++noteposition
+        displayNote()
+        invalidateOptionsMenu()
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        if(noteposition>=Datamanger.notes.lastIndex)
+        {
+            val menuItem=menu?.findItem(R.id.action_next)
+            if(menuItem!=null)
+            {
+                menuItem.icon = getDrawable(R.drawable.ic_block_black_24dp)
+                menuItem.isEnabled = false
+
+            }
+        }
+
+        return super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        saveNote()
+    }
+
+    private fun saveNote() {
+        val note= Datamanger.notes [noteposition]
+        note.title=textNoteTitle.text.toString()
+        note.text=textNoteText.text.toString()
+        note.course =  (spinnerCourses.selectedItem  as courseInfo).toString()
     }
 }
